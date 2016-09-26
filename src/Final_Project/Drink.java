@@ -14,7 +14,7 @@
 
 package Final_Project;
 
-public class Drink extends Product {
+public class Drink extends Product implements Comparable {
 
 	private int ounces;
 	
@@ -23,14 +23,14 @@ public class Drink extends Product {
 		
 	}
 	
-	public Drink(String productName, double price, int quantity, String dispenseLocation, int productId, int ounces) {
-		super(productName, price, quantity, dispenseLocation, productId);
+	public Drink(String productName, double price, int quantity, String dispenseLocation, int productId, String prodDescription, int dispenserID, int ounces) {
+		super(productName, price, quantity, dispenseLocation, productId, prodDescription, dispenserID);
 		this.ounces = ounces;
 	}
 	
 	//replicate an existing Drink object
 	public Drink(Drink drink){
-		super(drink.getName(), drink.getPrice(), drink.getQuantity(), drink.getDispenseLocation(), drink.getProductId());
+		super(drink.getName(), drink.getPrice(), drink.getQuantity(), drink.getDispenseLocation(), drink.getProductId(), drink.getDescription(), drink.getDispenserID());
 		this.ounces = drink.getOunces();
 	}
 	
@@ -43,6 +43,21 @@ public class Drink extends Product {
 	public int getOunces(){
 		return ounces;
 	}
+	
+	public int compareTo(Drink drink){
+		if(this.getName().charAt(0) < drink.getName().charAt(0))
+			return -1;
+		else if(this.getName().charAt(0) > drink.getName().charAt(0))
+			return 1;
+		else
+			if(this.getPrice() < drink.getPrice())
+				return -1;
+			else if(this.getPrice() > drink.getPrice())
+				return -1;
+			else
+				return 0;
+	}
+	
 	
 	@Override
 	public String toString(){
